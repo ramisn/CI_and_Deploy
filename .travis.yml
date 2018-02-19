@@ -1,0 +1,24 @@
+language: ruby
+rvm:
+- 2.4.0
+before_script:
+- bundle exec rake db:create --all
+- bundle exec rake db:migrate
+script:
+- bundle exec rake ci:tests
+services:
+- postgresql
+notifications:
+  email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: dVI+Gxwhy7Y6JM0M4gmgo3W4NbxoL8LcV6WDKvQDSb7JrTD/PcUOaDQK2pQTw3Nqa71ustk1jrRDdeJplyp4In05I7ps3YTs6mutfYahM6oh0E04uBd7B3HDrbkdb3G3A2CUyHUxxMzlp89VThqjQ6XQtCI47qQzelMgr5nBVr7xEYHhU36bDVPPnMKuroPfxjHaySQWnjiyzGwCc3+L5kcLWhSNbDFvZOwBjaUQ/bXFjHtsE/dBw9dTjmVh6sm7C6Egqd54X7cCdO52DMFtmXIAnihTtcGgUV0MpVAofJK/HvK3fKj+Wmnd2tEg/kt6KN+LJHL3LOKxCE+fViU7pR7me60q9RhuaSONLjxCYD97KnNhVzze+1ugFW4PMvv8GQ6IJ8uq4h+EnlMLJefUNZKAInL9SDztqkEG06hKLXXVISaJfP0Ujo5q31ZWGCh4x3GpPEdOJMtsH+mm+etS7DaLz83vvZNBjadBq7uE6HgzqxM3HPnKcGd3vtqkI6r4BTBfJMx+vKifOPI5ScQHN5kGeesbZ/Cvw/TKYFmJkb7GgjhMoDmpXU/6f9O5mfMtEkezMxPU2gCjhVP9AMRwc2BCVirMwf47PLbZxFc+ScwrjUtpcsNrS+9JSUar+p78RlSVk0ZLnnmKaqFEf6tgqAuw/qNit+aiYjU96Q1LShE=
+  app:
+    develop: https://ci-and-deploy26.herokuapp.com/
+    master: https://ci-and-deploy36.herokuapp.com/
+  on:
+    repo: https://github.com/ramisn/CI_and_Deploy.git
+  run:
+    - "rails db:migrate"
+  
