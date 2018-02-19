@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: CI_and_Deploy_development
+  database: CI_and_Deploy_dev
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -55,7 +55,7 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
+test: &test
   <<: *default
   database: CI_and_Deploy_test
 
@@ -83,3 +83,6 @@ production:
   database: CI_and_Deploy_production
   username: CI_and_Deploy
   password: <%= ENV['CI_AND_DEPLOY_DATABASE_PASSWORD'] %>
+
+cucumber:
+  <<: *test
